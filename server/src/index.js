@@ -88,19 +88,19 @@ app.get("/get-all-food-trucks", async (req, res) => {
   res.json(trucks);
 });
 
-// 2. GET /get-food-truck-by-id/:id
+// 2. GET /get-food-truck-by-id/:id - Ysabel
 
-// 3. GET /get-vegan-food-trucks
+// 3. GET /get-vegan-food-trucks - Shirley
 
-// 4. GET /get-food-trucks-by-price/:price
+// 4. GET /get-food-trucks-by-price/:price - Seth
 
-// 5. GET /get-top-rated-food-trucks
+// 5. GET /get-top-rated-food-trucks - Morgan
 
-// 6. GET /get-food-trucks-sorted-by-rating
+// 6. GET /get-food-trucks-sorted-by-rating - Zesty Pepper
 
-// 7. GET /get-food-trucks-sorted-by-price
+// 7. GET /get-food-trucks-sorted-by-price - Jana
 
-// 8. GET /get-food-trucks-count
+// 8. GET /get-food-trucks-count - Hailey
 
 // 9. POST /add-one-food-truck
 app.post("/add-one-food-truck", async (req, res) => {
@@ -127,9 +127,9 @@ app.post("/add-one-food-truck", async (req, res) => {
   res.send(`Success! ${truck.name} was added!`);
 });
 
-// 10. POST /delete-one-food-truck/:id
+// 10. POST /delete-one-food-truck/:id - Carlotta
 
-// 11. POST /update-food-truck-location
+// 11. POST /update-food-truck-location - Arianne
 
-// 12. POST /update-food-truck-rating
+// 12. POST /update-food-truck-rating - BONUS!
 
