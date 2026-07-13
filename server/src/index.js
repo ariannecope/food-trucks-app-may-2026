@@ -30,6 +30,10 @@ async function getAllFoodTrucks() {
 }
 
 // 2. getFoodTruckById(id)
+async function getFoodTruckById(id) {
+  const result = await db.query("SELECT * FROM food_trucks WHERE id = $1" , [id]);
+  return result.rows[0];
+}
 
 // 3. getVeganFoodTrucks()
 // Gets all food trucks that offer vegan options
@@ -119,43 +123,30 @@ app.get("/get-all-food-trucks", async (req, res) => {
   res.json(trucks);
 });
 
-// 2. GET /get-food-truck-by-id/:id 
+// 2. GET /get-food-truck-by-id/:id - Carlotta
+app.get("/get-food-truck-by-id/:id", async (req,res) => {
+  const { id } = req.params;
+  const truck = await getFoodTruckById(id);
+  if (truck) {
+    res.json(truck);
+  } else {
+    res.send(`Food truck with ID ${id} not found.`);
+  }
+})
 
-// 3. GET /get-vegan-food-trucks 
-// Returns all food trucks with vegan options as JSON
-app.get("/get-vegan-food-trucks", async (req, res) => {
-  const trucks = await getVeganFoodTrucks();
-  res.json(trucks);
-});
+// 3. GET /get-vegan-food-trucks - Jana
 
 // 4. GET /get-food-trucks-by-price/:price - Hailey
 
-// api endpoint to get food trucks by price level with error handling for invalid price levels
-app.get("/get-food-trucks-by-price/:price", async (req, res) => {
-  const price = parseInt(req.params.price);
-  try {
-    const trucks = await getFoodTrucksByPrice(price);
-    res.json(trucks);
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-});
-
 // 5. GET /get-top-rated-food-trucks - Arianne
 
-app.get("/get-top-rated-food-trucks", async (req, res) => {
-  const foodTrucks = await getTopRatedFoodTrucks();
+// 6. GET /get-food-trucks-sorted-by-rating - Morgan
 
-  res.json(foodTrucks);
-});
+// 7. GET /get-food-trucks-sorted-by-price - Ysabel
 
-// 6. GET /get-food-trucks-sorted-by-rating 
+// 8. GET /get-food-trucks-count - Meribel
 
-// 7. GET /get-food-trucks-sorted-by-price 
-
-// 8. GET /get-food-trucks-count 
-
-// 9. POST /add-one-food-truck
+// 9. POST /add-one-food-truck - Shirley
 app.post("/add-one-food-truck", async (req, res) => {
   const {
     name,
@@ -180,7 +171,7 @@ app.post("/add-one-food-truck", async (req, res) => {
   res.send(`Success! ${truck.name} was added!`);
 });
 
-// 10. POST /delete-one-food-truck/:id 
+// 10. POST /delete-one-food-truck/:id - Seth
 
 // 11. POST /update-food-truck-location 
 
