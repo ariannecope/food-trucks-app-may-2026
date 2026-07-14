@@ -238,10 +238,10 @@ app.post("/delete-one-food-truck/:id", async (req, res) => {
   const id = req.params.id;
 
   await deleteOneFoodTruck(id);
-
+});
 // 12. POST /update-food-truck-rating - BONUS! - ZESTY
 app.post("/update-food-truck-rating", async (req, res) => {
   const {id, rating} = req.body;
   const truck = await updateFoodTruckRating(id, rating);
    res.send(`Success! ${truck.name}'s rating was updated to ${truck.rating}.`);
-});
+}); 
