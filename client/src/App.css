@@ -76,3 +76,16 @@ form button {
   font-size: 1rem;
   cursor: pointer;
 }
+
+.food-truck-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+
+}
+
+.food-truck-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
