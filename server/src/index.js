@@ -61,17 +61,28 @@ async function getFoodTrucksByPrice(price) {
   return result.rows;
 }
 
-// 5. getTopRatedFoodTrucks()
+// 5. getTopRatedFoodTrucks()--Arianne
+
+//Helper Function for retrieving all food trucks with a rating of 4.5 or higher. 
+//its asynchronous because querying the database takes time. async allows us to use await, which pauses this function until the database responds, without freezing the rest of the application.
+//the () are empty of parameters because the function doesn't need any information from whoever calls it. 
 
 async function getTopRatedFoodTrucks() {
+  //Ask the database to run this SQL query. Wait until it finishes. Then store the database's response in a variable called result.
+//db -- this represents your connection to PostgreSQL
+//query -- a method that belongs to the db object
   const result = await db.query(`
     SELECT *
     FROM food_trucks
     WHERE rating >= 4.5;
   `);
+//The backticks around the SQL query say, Javascript, don't try to execute this. Treat everything inside as plain text.
 
+//return the rows that match the query
   return result.rows;
 }
+
+
 
 // 6. getFoodTrucksSortedByRating()
 
@@ -184,11 +195,23 @@ app.get("/get-food-truck-by-id/:id", async (req, res) => {
   }
 });
 
-// 3. GET /get-vegan-food-trucks - Jana
+//5. Get top-rated-food-trucks--Arianne
+//Endpoint: Return all top-rated food trucks as JSON
 
-// 4. GET /get-food-trucks-by-price/:price - Hailey
+//get is a method that doesn't retrieve the data itself. Instead, it registers an endpoint, like adding a new door to your server.
+//So now if browser of postman requests GET /get-top-rated-food-trucks, Express knows exactly which function to run.
+//async: This endpoint needs to wait for the helper function to finish talking to the database.
+//req and res are parameters that express automatically provides whenever someone makes a request.
 
-// 4. GET /get-food-trucks-by-price/:price - ?
+app.get("/get-top-rated-food-trucks", async (req, res) => {
+  //call the helper function and store the results in a variable called foodTrucks
+  const foodTrucks = await getTopRatedFoodTrucks();
+  //res is the response object
+  //.json is a method that tells express to convert the javascript value into JSON and sent it back to the client.
+  res.json(foodTrucks);
+});
+
+
 
 // 6. GET /get-food-trucks-sorted-by-rating -  Morgan
 // GET endpoint to retrieve all food trucks sorted by their rating
